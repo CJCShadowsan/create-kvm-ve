@@ -362,12 +362,11 @@ The `create-ve.sh` script will attempt to detect existing virtual environments a
 
 ## Issues and Limitations
 
-The `create-ve.sh` script currently needs to be executed as the root super-user. There are a few reasons for this:
-
-1. The KVM network configuration commands need to be run with super-user privileges because they create driver interfaces.
-1. The default SELinux policies prevent creation of VM images in user home directories. Since unprivileged users cannot change the policies and because they do not generally have read/write access to arbitrary areas of the file system, attempting to create VMs will cause permission denied errors. Running as root allows the scripts to install VMs to a directory not obstructed by SELinux (e.g. `/var/lib/vm-img`).
-1.1. This needs to be fixed in a future release of the scripts – once there is a better understanding of the labeling required. Even now, the root account has limits on where it can store the VMs.
-1.1. If using Fedora, the root user can create a subdirectory under `/home` for storing VMs, e.g. `/home/kvm`. Fedora's default disk partitioning layout creates a very large `/home` partition, so it makes sense to use that for VM image files. This does not require any specific SELinux labels to be allocated to the directory.
+1. The `create-ve.sh` script currently needs to be executed as the root super-user. There are a few reasons for this:
+1.1. The KVM network configuration commands need to be run with super-user privileges because they create driver interfaces.
+1.1. The default SELinux policies prevent creation of VM images in user home directories. Since unprivileged users cannot change the policies and because they do not generally have read/write access to arbitrary areas of the file system, attempting to create VMs will cause permission denied errors. Running as root allows the scripts to install VMs to a directory not obstructed by SELinux (e.g. `/var/lib/vm-img`).
+1.1.1. This needs to be fixed in a future release of the scripts – once there is a better understanding of the labeling required. Even now, the root account has limits on where it can store the VMs.
+1.1.1. If using Fedora, the root user can create a subdirectory under `/home` for storing VMs, e.g. `/home/kvm`. Fedora's default disk partitioning layout creates a very large `/home` partition, so it makes sense to use that for VM image files. This does not require any specific SELinux labels to be allocated to the directory.
 1. The kickstart templates are embedded in the `create-ve script`. This has advantages and disadvantages, with the biggest disadvantage being maintenance and customisation of the templates. Currently, there are 2 templates: one for the Lustre hosts (servers and clients), one for the Admin host
 1. The `remove-ve.sh` script does not remove the VM disk images.
 1. Only supports RHEL or CentOS guests
