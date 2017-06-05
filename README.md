@@ -70,7 +70,11 @@ Enable the HTTP service to start on system boot:
 
 ```
 systemctl enable httpd
+```
+
 Start the HTTP server:
+
+```
 systemctl start httpd
 ```
 
