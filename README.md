@@ -61,9 +61,11 @@ The web server is required in order to create a package repository for the OS di
 
 ```
 mkdir -p /mnt/iso
-mount -o loop CentOS-7-x86_64-DVD-1611.iso /mnt/iso
+wget http://mirrors.binaryracks.com/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-latest-dvd1.iso /tmp
+mount -o loop /tmp/CentOS-Stream-8-x86_64-latest-dvd1.iso /mnt/iso
 cp -a /mnt/iso /var/www/html/CENTOS7.3
 umount /mnt/iso
+rm -f /tmp/CentOS-Stream-8-x86_64-latest-dvd1.iso
 ```
 
 Enable the HTTP service to start on system boot:
